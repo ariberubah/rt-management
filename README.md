@@ -1,58 +1,253 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏘️ RT Management
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi administrasi RT berbasis web untuk mengelola penghuni, rumah, tagihan iuran bulanan, dan pengeluaran perumahan.
 
-## About Laravel
+Dibangun dengan **Laravel 13 + React (Inertia.js) + MySQL**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Fitur
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Kelola Rumah** — Tambah/edit rumah, assign penghuni, riwayat penghuni per rumah
+- **Kelola Penghuni** — Data penghuni lengkap beserta foto KTP, status penghuni (tetap/kontrak), status menikah
+- **Tagihan Iuran** — Generate tagihan bulanan otomatis (satpam + kebersihan) untuk semua rumah yang dihuni, catat pembayaran, bayar kebersihan 1 tahun sekaligus
+- **Pengeluaran** — Catat pengeluaran per bulan dengan kategori (rutin/tidak rutin), upload bukti
+- **Dashboard** — Grafik pemasukan vs pengeluaran selama 1 tahun, statistik ringkasan
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tech Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Layer | Teknologi |
+|-------|-----------|
+| Backend | PHP 8.2+, Laravel 13 |
+| Frontend | React 19, Inertia.js |
+| Styling | Tailwind CSS v4 |
+| Database | MySQL 8 |
+| Package Manager | Bun |
+| Build Tool | Vite |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## ⚙️ Requirements
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Pastikan sudah terinstall di mesin Anda:
+
+- PHP **8.2** atau lebih baru (dengan extension: `curl`, `mbstring`, `openssl`, `fileinfo`, `pdo_mysql`, `zip`)
+- Composer **2.x**
+- Node.js / **Bun** (direkomendasikan)
+- MySQL **8.x** (bisa via XAMPP)
+- Git
+
+---
+
+## 🚀 Instalasi
+
+### 1. Clone Repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/USERNAME/rt-management.git
+cd rt-management
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install PHP Dependencies
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Install JavaScript Dependencies
 
-## Code of Conduct
+```bash
+bun install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. Konfigurasi Environment
 
-## Security Vulnerabilities
+Copy file `.env.example` menjadi `.env`:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+cp .env.example .env
+```
 
-## License
+Generate application key:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan key:generate
+```
+
+### 5. Konfigurasi Database
+
+Buka file `.env`, sesuaikan konfigurasi database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rt_management
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Buat database di MySQL:
+
+```sql
+CREATE DATABASE rt_management;
+```
+
+### 6. Konfigurasi Iuran
+
+Sesuaikan nominal iuran di `.env` (opsional, sudah ada default):
+
+```env
+IURAN_SATPAM=100000
+IURAN_KEBERSIHAN=15000
+```
+
+### 7. Jalankan Migration
+
+```bash
+php artisan migrate
+```
+
+### 8. Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 9. Jalankan Aplikasi
+
+Buka **dua terminal terpisah**:
+
+**Terminal 1 — Laravel:**
+```bash
+php artisan serve
+```
+
+**Terminal 2 — Vite (React):**
+```bash
+bun run dev
+```
+
+Buka browser di: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+## 📁 Struktur Direktori Penting
+
+```
+rt-management/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/        # Controller Laravel
+│   │   └── Middleware/
+│   │       └── HandleInertiaRequests.php
+│   └── Models/                 # Eloquent Models
+├── config/
+│   └── iuran.php               # Konfigurasi nominal iuran
+├── database/
+│   └── migrations/             # Migration tabel
+├── resources/
+│   ├── css/
+│   │   └── app.css
+│   ├── js/
+│   │   ├── Components/
+│   │   │   ├── Layout/
+│   │   │   │   └── AppLayout.jsx
+│   │   │   └── ui/             # Komponen UI (Button, Input, dll)
+│   │   ├── Pages/
+│   │   │   ├── Dashboard/
+│   │   │   ├── Houses/
+│   │   │   ├── Residents/
+│   │   │   ├── BillingPeriods/
+│   │   │   ├── Expenses/
+│   │   │   └── ExpenseCategories/
+│   │   ├── lib/
+│   │   │   └── utils.js
+│   │   └── app.jsx
+│   └── views/
+│       └── app.blade.php
+├── routes/
+│   └── web.php
+└── .env.example
+```
+
+---
+
+## 🗄️ Struktur Database (ERD)
+
+| Tabel | Keterangan |
+|-------|------------|
+| `houses` | Data rumah |
+| `residents` | Data penghuni |
+| `house_residents` | Relasi rumah-penghuni + riwayat |
+| `billing_periods` | Periode tagihan (bulan/tahun) |
+| `billing_items` | Tagihan per rumah per jenis iuran |
+| `payments` | Catatan pembayaran |
+| `expense_categories` | Kategori pengeluaran |
+| `expenses` | Data pengeluaran |
+
+---
+
+## 📖 Panduan Penggunaan
+
+### Alur Setup Awal
+
+1. **Tambah Kategori Pengeluaran** — `/expense-categories` → Tambah kategori seperti "Gaji Satpam", "Token Listrik", dll
+2. **Tambah Rumah** — `/houses` → Input semua nomor rumah yang ada
+3. **Tambah Penghuni** — `/residents` → Input data penghuni beserta foto KTP
+4. **Assign Penghuni ke Rumah** — `/houses` → Buka detail rumah → Tambah Penghuni
+
+### Alur Tagihan Bulanan
+
+1. Buka `/billing-periods` → **Buat Periode** → pilih bulan & tahun
+2. Buka detail periode → klik **Generate Tagihan** (otomatis membuat tagihan untuk semua rumah yang dihuni)
+3. Catat pembayaran satu per satu via tombol **Bayar**, atau gunakan **Bayar Kebersihan Tahunan** untuk bayar iuran kebersihan 1 tahun sekaligus
+
+### Catat Pengeluaran
+
+Buka `/expenses` → **Tambah** → isi kategori, nominal, deskripsi, tanggal, dan bukti (opsional)
+
+---
+
+## 🔧 Konfigurasi Tambahan
+
+### Ubah Nominal Iuran
+
+Edit file `.env`:
+
+```env
+IURAN_SATPAM=100000
+IURAN_KEBERSIHAN=15000
+```
+
+Lalu jalankan:
+
+```bash
+php artisan config:clear
+```
+
+### Build untuk Production
+
+```bash
+bun run build
+php artisan config:cache
+php artisan route:cache
+```
+
+---
+
+## 🐛 Troubleshooting
+
+**Vite manifest not found**
+→ Jalankan `bun run dev` di terminal terpisah
+
+**No connection to MySQL**
+→ Pastikan MySQL sudah running (XAMPP Control Panel → Start MySQL)
+
+**PHP extension missing**
+→ Buka `php.ini` → hapus `;` di depan extension yang dibutuhkan → restart terminal
+
+**Storage foto tidak muncul**
+→ Jalankan `php artisan storage:link`
