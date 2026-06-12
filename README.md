@@ -192,6 +192,76 @@ rt-management/
 | `expense_categories` | Expense categories                       |
 | `expenses`           | Expense records                          |
 
+
+## 🗺️ ERD
+
+```mermaid
+erDiagram
+  HOUSE {
+    bigint id PK
+    string nomor_rumah
+    string alamat
+    enum status
+  }
+  RESIDENT {
+    bigint id PK
+    string nama_lengkap
+    string no_telepon
+    string foto_ktp_path
+    enum status_penghuni
+    enum status_menikah
+  }
+  HOUSE_RESIDENT {
+    bigint id PK
+    bigint house_id FK
+    bigint resident_id FK
+    date tanggal_masuk
+    date tanggal_keluar
+    boolean is_active
+  }
+  BILLING_PERIOD {
+    bigint id PK
+    int bulan
+    int tahun
+    timestamp generated_at
+  }
+  BILLING_ITEM {
+    bigint id PK
+    bigint billing_period_id FK
+    bigint house_id FK
+    bigint resident_id FK
+    enum jenis_iuran
+    decimal nominal
+    enum status
+  }
+  PAYMENT {
+    bigint id PK
+    bigint billing_item_id FK
+    decimal jumlah_bayar
+    date tanggal_bayar
+  }
+  EXPENSE_CATEGORY {
+    bigint id PK
+    string nama_kategori
+    boolean is_recurring
+  }
+  EXPENSE {
+    bigint id PK
+    bigint expense_category_id FK
+    int bulan
+    int tahun
+    decimal nominal
+    string deskripsi
+    date tanggal
+  }
+  HOUSE ||--o{ HOUSE_RESIDENT : "memiliki"
+  RESIDENT ||--o{ HOUSE_RESIDENT : "menghuni"
+  BILLING_PERIOD ||--o{ BILLING_ITEM : "menghasilkan"
+  HOUSE ||--o{ BILLING_ITEM : "ditagih"
+  RESIDENT ||--o{ BILLING_ITEM : "ditagih ke"
+  BILLING_ITEM ||--o| PAYMENT : "dibayar via"
+  EXPENSE_CATEGORY ||--o{ EXPENSE : "mengkategorikan"
+```
 ---
 
 ## 📖 User Guide
