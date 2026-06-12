@@ -1,49 +1,49 @@
 # 🏘️ RT Management
 
-Aplikasi administrasi RT berbasis web untuk mengelola penghuni, rumah, tagihan iuran bulanan, dan pengeluaran perumahan.
+A web-based neighborhood administration system designed to manage residents, houses, monthly community fees, and housing expenses.
 
-Dibangun dengan **Laravel 13 + React (Inertia.js) + MySQL**.
+Built with **Laravel 13 + React (Inertia.js) + MySQL**.
 
 ---
 
-## ✨ Fitur
+## ✨ Features
 
-- **Kelola Rumah** — Tambah/edit rumah, assign penghuni, riwayat penghuni per rumah
-- **Kelola Penghuni** — Data penghuni lengkap beserta foto KTP, status penghuni (tetap/kontrak), status menikah
-- **Tagihan Iuran** — Generate tagihan bulanan otomatis (satpam + kebersihan) untuk semua rumah yang dihuni, catat pembayaran, bayar kebersihan 1 tahun sekaligus
-- **Pengeluaran** — Catat pengeluaran per bulan dengan kategori (rutin/tidak rutin), upload bukti
-- **Dashboard** — Grafik pemasukan vs pengeluaran selama 1 tahun, statistik ringkasan
+* **House Management** — Add/edit houses, assign residents, and track resident history for each house.
+* **Resident Management** — Store complete resident information, including ID card photos, residency status (permanent/rental), and marital status.
+* **Monthly Fee Billing** — Automatically generate monthly bills (security and cleaning fees) for all occupied houses, record payments, and support annual cleaning fee payments.
+* **Expense Management** — Record monthly expenses by category (recurring/non-recurring) and upload supporting documents.
+* **Dashboard** — View income vs. expense charts over a 12-month period and summary statistics.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Teknologi |
-|-------|-----------|
-| Backend | PHP 8.2+, Laravel 13 |
-| Frontend | React 19, Inertia.js |
-| Styling | Tailwind CSS v4 |
-| Database | MySQL 8 |
-| Package Manager | Bun |
-| Build Tool | Vite |
+| Layer           | Technology           |
+| --------------- | -------------------- |
+| Backend         | PHP 8.2+, Laravel 13 |
+| Frontend        | React 19, Inertia.js |
+| Styling         | Tailwind CSS v4      |
+| Database        | MySQL 8              |
+| Package Manager | Bun                  |
+| Build Tool      | Vite                 |
 
 ---
 
 ## ⚙️ Requirements
 
-Pastikan sudah terinstall di mesin Anda:
+Make sure the following software is installed on your machine:
 
-- PHP **8.2** atau lebih baru (dengan extension: `curl`, `mbstring`, `openssl`, `fileinfo`, `pdo_mysql`, `zip`)
-- Composer **2.x**
-- Node.js / **Bun** (direkomendasikan)
-- MySQL **8.x** (bisa via XAMPP)
-- Git
+* PHP **8.2** or later (with extensions: `curl`, `mbstring`, `openssl`, `fileinfo`, `pdo_mysql`, `zip`)
+* Composer **2.x**
+* Node.js / **Bun** (recommended)
+* MySQL **8.x** (can be installed via XAMPP)
+* Git
 
 ---
 
-## 🚀 Instalasi
+## 🚀 Installation
 
-### 1. Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/USERNAME/rt-management.git
@@ -62,23 +62,23 @@ composer install
 bun install
 ```
 
-### 4. Konfigurasi Environment
+### 4. Configure Environment Variables
 
-Copy file `.env.example` menjadi `.env`:
+Copy `.env.example` to `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-Generate application key:
+Generate the application key:
 
 ```bash
 php artisan key:generate
 ```
 
-### 5. Konfigurasi Database
+### 5. Configure the Database
 
-Buka file `.env`, sesuaikan konfigurasi database:
+Open the `.env` file and update the database settings:
 
 ```env
 DB_CONNECTION=mysql
@@ -89,65 +89,69 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Buat database di MySQL:
+Create the database in MySQL:
 
 ```sql
 CREATE DATABASE rt_management;
 ```
 
-### 6. Konfigurasi Iuran
+### 6. Configure Community Fees
 
-Sesuaikan nominal iuran di `.env` (opsional, sudah ada default):
+Adjust the fee amounts in `.env` if needed (default values are already provided):
 
 ```env
 IURAN_SATPAM=100000
 IURAN_KEBERSIHAN=15000
 ```
 
-### 7. Jalankan Migration
+### 7. Run Database Migrations
 
 ```bash
 php artisan migrate
 ```
 
-### 8. Storage Link
+### 8. Create Storage Symlink
 
 ```bash
 php artisan storage:link
 ```
 
-### 9. Jalankan Aplikasi
+### 9. Start the Application
 
-Buka **dua terminal terpisah**:
+Open **two separate terminals**:
 
 **Terminal 1 — Laravel:**
+
 ```bash
 php artisan serve
 ```
 
 **Terminal 2 — Vite (React):**
+
 ```bash
 bun run dev
 ```
 
-Buka browser di: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+Open your browser and visit:
+
+http://127.0.0.1:8000
 
 ---
 
-## 📁 Struktur Direktori Penting
+## 📁 Important Directory Structure
 
-```
+```text
 rt-management/
 ├── app/
 │   ├── Http/
-│   │   ├── Controllers/        # Controller Laravel
+│   │   ├── Controllers/        # Laravel Controllers
 │   │   └── Middleware/
 │   │       └── HandleInertiaRequests.php
 │   └── Models/                 # Eloquent Models
 ├── config/
-│   └── iuran.php               # Konfigurasi nominal iuran
+│   └── iuran.php               # Community fee configuration
 ├── database/
-│   └── migrations/             # Migration tabel
+│   └── migrations/             # Database migrations
 ├── resources/
 │   ├── css/
 │   │   └── app.css
@@ -155,7 +159,7 @@ rt-management/
 │   │   ├── Components/
 │   │   │   ├── Layout/
 │   │   │   │   └── AppLayout.jsx
-│   │   │   └── ui/             # Komponen UI (Button, Input, dll)
+│   │   │   └── ui/             # UI Components (Button, Input, etc.)
 │   │   ├── Pages/
 │   │   │   ├── Dashboard/
 │   │   │   ├── Houses/
@@ -175,60 +179,60 @@ rt-management/
 
 ---
 
-## 🗄️ Struktur Database (ERD)
+## 🗄️ Database Structure (ERD)
 
-| Tabel | Keterangan |
-|-------|------------|
-| `houses` | Data rumah |
-| `residents` | Data penghuni |
-| `house_residents` | Relasi rumah-penghuni + riwayat |
-| `billing_periods` | Periode tagihan (bulan/tahun) |
-| `billing_items` | Tagihan per rumah per jenis iuran |
-| `payments` | Catatan pembayaran |
-| `expense_categories` | Kategori pengeluaran |
-| `expenses` | Data pengeluaran |
-
----
-
-## 📖 Panduan Penggunaan
-
-### Alur Setup Awal
-
-1. **Tambah Kategori Pengeluaran** — `/expense-categories` → Tambah kategori seperti "Gaji Satpam", "Token Listrik", dll
-2. **Tambah Rumah** — `/houses` → Input semua nomor rumah yang ada
-3. **Tambah Penghuni** — `/residents` → Input data penghuni beserta foto KTP
-4. **Assign Penghuni ke Rumah** — `/houses` → Buka detail rumah → Tambah Penghuni
-
-### Alur Tagihan Bulanan
-
-1. Buka `/billing-periods` → **Buat Periode** → pilih bulan & tahun
-2. Buka detail periode → klik **Generate Tagihan** (otomatis membuat tagihan untuk semua rumah yang dihuni)
-3. Catat pembayaran satu per satu via tombol **Bayar**, atau gunakan **Bayar Kebersihan Tahunan** untuk bayar iuran kebersihan 1 tahun sekaligus
-
-### Catat Pengeluaran
-
-Buka `/expenses` → **Tambah** → isi kategori, nominal, deskripsi, tanggal, dan bukti (opsional)
+| Table                | Description                              |
+| -------------------- | ---------------------------------------- |
+| `houses`             | House records                            |
+| `residents`          | Resident records                         |
+| `house_residents`    | House-resident relationships and history |
+| `billing_periods`    | Billing periods (month/year)             |
+| `billing_items`      | Bills per house and fee type             |
+| `payments`           | Payment records                          |
+| `expense_categories` | Expense categories                       |
+| `expenses`           | Expense records                          |
 
 ---
 
-## 🔧 Konfigurasi Tambahan
+## 📖 User Guide
 
-### Ubah Nominal Iuran
+### Initial Setup Flow
 
-Edit file `.env`:
+1. **Create Expense Categories** — `/expense-categories` → Add categories such as "Security Guard Salary", "Electricity Token", etc.
+2. **Add Houses** — `/houses` → Enter all existing house numbers.
+3. **Add Residents** — `/residents` → Enter resident information along with ID card photos.
+4. **Assign Residents to Houses** — `/houses` → Open house details → Add Resident.
+
+### Monthly Billing Flow
+
+1. Go to `/billing-periods` → **Create Period** → Select month and year.
+2. Open the billing period details → Click **Generate Bills** (automatically creates bills for all occupied houses).
+3. Record payments individually using the **Pay** button, or use **Annual Cleaning Fee Payment** to pay one year of cleaning fees at once.
+
+### Recording Expenses
+
+Go to `/expenses` → **Add** → Fill in the category, amount, description, date, and supporting document (optional).
+
+---
+
+## 🔧 Additional Configuration
+
+### Change Community Fee Amounts
+
+Edit the `.env` file:
 
 ```env
 IURAN_SATPAM=100000
 IURAN_KEBERSIHAN=15000
 ```
 
-Lalu jalankan:
+Then run:
 
 ```bash
 php artisan config:clear
 ```
 
-### Build untuk Production
+### Production Build
 
 ```bash
 bun run build
@@ -241,13 +245,17 @@ php artisan route:cache
 ## 🐛 Troubleshooting
 
 **Vite manifest not found**
-→ Jalankan `bun run dev` di terminal terpisah
+→ Run `bun run dev` in a separate terminal.
 
-**No connection to MySQL**
-→ Pastikan MySQL sudah running (XAMPP Control Panel → Start MySQL)
+**Unable to connect to MySQL**
+→ Ensure MySQL is running (XAMPP Control Panel → Start MySQL).
 
-**PHP extension missing**
-→ Buka `php.ini` → hapus `;` di depan extension yang dibutuhkan → restart terminal
+**Missing PHP extension**
+→ Open `php.ini` → Remove the `;` before the required extension → Restart the terminal.
 
-**Storage foto tidak muncul**
-→ Jalankan `php artisan storage:link`
+**Uploaded photos are not displayed**
+→ Run:
+
+```bash
+php artisan storage:link
+```
